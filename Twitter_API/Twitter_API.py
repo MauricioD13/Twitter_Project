@@ -21,3 +21,5 @@ for tweet in tweepy.Cursor(api.search,q="Petro",tweet_mode ="extended").items(1)
     data = data["full_text"]
     file_tweets.write(data+"|")
 file_tweets.close
+
+#hola
