@@ -133,3 +133,5 @@ sandbox/
 
 #Keys
 keys.txt
+tweets.txt
+*.json

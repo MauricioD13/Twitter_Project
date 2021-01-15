@@ -1,13 +1,13 @@
 import tweepy
 import json
-
+#Instalar las dependencias
+#pip install tweepy
 file = open("keys.txt","r")
 dict_keys = {}
 elem = []
 for line in file:
     elem = line.split("=")
     dict_keys[elem[0]] = elem[1].rstrip('\n')
-    print(elem)
 auth = tweepy.OAuthHandler(dict_keys.get("consumer_key"),dict_keys.get("consumer_secret"))
 auth.set_access_token(dict_keys.get("Access_token"),dict_keys.get("Access_token_secret"))
 
@@ -15,9 +15,9 @@ auth.set_access_token(dict_keys.get("Access_token"),dict_keys.get("Access_token_
 api = tweepy.API(auth,wait_on_rate_limit=True,wait_on_rate_limit_notify=True) # Si llega al limite de cupo, el programa no va a crashear sino que espera a que haya cupo otra vez
 #MI PROPIA INFORMACION
 
-data = api.me() 
+#data = api.me() 
 #Data -> Es un objeto 'User'
-print(json.dumps(data._json,indent=2)) 
+#print(json.dumps(data._json,indent=2)) 
 
 #Todo objeto 'User' tiene el atributo ._json que devuelve el json de los datos 
 #Espacio para visualizar el JSON 
@@ -40,9 +40,10 @@ print(json.dumps(data._json,indent=2))
 
 #OBTENER UN TIMELINE -> TODOS LOS TWEETS DE UN USUARIO
 
-#for tweet in tweepy.Cursor(api.user_timeline,screen_name="mauriciodavidc",tweet_mode = "extended").items(2):
-#    data = json.dumps(tweet._json,indent = 2)
-#    print(dict(data))
+for tweet in tweepy.Cursor(api.user_timeline,screen_name="mauriciodavidc",tweet_mode = "extended").items(2):
+    #data = json.dumps(tweet._json,indent = 2)
+    data = tweet._json["full_text"]
+    print(data)
 # El parametro 3 del Cursor indica la longitud del tweet dado que en algun momento fue cambiado 
 
 #BUSCAR TWEETS 
